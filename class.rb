@@ -30,6 +30,7 @@ class BoardGame
     puts "Game Over"
   end
 
+  private
   def display
     display_board(@@board)
   end
