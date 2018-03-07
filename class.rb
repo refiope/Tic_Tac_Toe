@@ -13,13 +13,19 @@ class BoardGame
     player = 1
 
     welcome_comment
+
     while (check_game_end == false) do
       display
       puts "Player #{player} turn: "
-      input = gets.chop
-      mark(input)
+      player_input = gets.chop
+      while (!check_input(player_input)) do
+        player_input = gets.chop
+      end
+      mark(player_input)
+      #switch player after input
       player == 1 ? player += 1 : player -=1
     end
+
     display
     puts "Game Over"
   end
@@ -29,7 +35,8 @@ class BoardGame
   end
 
   def mark (input)
-    @@board = mark_input(@@board, input, @@player_turn) #have to figure out getting input later
+    @@board = mark_input(@@board, input, @@player_turn)
+    #switch player after input
     @@player_turn == "O" ? @@player_turn = "X" : @@player_turn = "O"
   end
 

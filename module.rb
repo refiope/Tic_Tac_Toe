@@ -5,7 +5,7 @@ module Board
     puts "a column! Enjoy."
   end
 
-  def display_board(board)
+  def display_board (board)
     coordinate = ["A","B","C"]
     board.each_index do |row|
       puts ""
@@ -21,10 +21,22 @@ module Board
     return input =  2 if input == 'c'
   end
 
-  def mark_input (board, input, player_choice)
+  def split_input (input)
     array_input = input.split('')
     row_input = convert_input(array_input[0].downcase)
-    column_input = (array_input[1].to_i) - 1
+    column_input = (array_input[1].to_i) - 1 if (/[\d]/ === array_input[1])
+    coordinate = Array.new([row_input, column_input])
+    return coordinate
+  end
+
+  def check_input (input)
+    return true if (split_input(input).all? {|coordinate| /[0-2]/ === coordinate.to_s})
+    puts "Enter the correct input"
+    return false
+  end
+
+  def mark_input (board, input, player_choice)
+    row_input, column_input = split_input(input)[0], split_input(input)[1]
     board[row_input][column_input] = player_choice
     return board
   end
