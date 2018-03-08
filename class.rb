@@ -5,10 +5,13 @@ class BoardGame
 
   @@player_turn = "O"
 
+  #create new board with new instance
   def initialize
     @@board = Array.new([["-","-","-"],["-","-","-"],["-","-","-"]])
   end
 
+  public
+  #play the game using the private methods and loops
   def play
     player = 1
 
@@ -35,16 +38,14 @@ class BoardGame
     display_board(@@board)
   end
 
+  #marking user's input to the board
   def mark (input)
     @@board = mark_input(@@board, input, @@player_turn)
     #switch player after input
     @@player_turn == "O" ? @@player_turn = "X" : @@player_turn = "O"
   end
 
-  def empty
-    @@board = empty_board(@@board)
-  end
-
+  #checking wheter game should end or not
   def check_game_end
     game_end(@@board)
   end
